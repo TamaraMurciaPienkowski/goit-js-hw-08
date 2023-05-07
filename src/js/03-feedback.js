@@ -4,20 +4,26 @@ const logData = {
   email: '',
   message: '',
 };
-function inputData(e) {
+
+const inputData = myFunction(e => {
   logData[e.target.name] = e.target.value;
-  myFunction(
-    localStorage.setItem('feedback-form-state', JSON.stringify(logData)),
-    500
-  );
-}
+  localStorage.setItem('feedback-form-state', JSON.stringify(logData));
+}, 500);
+
+// function inputData(e) {
+//   logData[e.target.name] = e.target.value;
+//   myFunction(
+//     localStorage.setItem('feedback-form-state', JSON.stringify(logData)),
+//     500
+//   );
+// }
 
 form.addEventListener('input', inputData);
 
 function fillInput() {
   const inputFilling = localStorage.getItem('feedback-form-state');
   const parsedFilling = JSON.parse(inputFilling);
-  if ((parsedFilling.email !== '') & (parsedFilling.message !== '')) {
+  if (parsedFilling) {
     form.email.value = parsedFilling.email;
     form.message.value = parsedFilling.message;
   } else {
