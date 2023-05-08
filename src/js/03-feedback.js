@@ -5,20 +5,16 @@ const logData = {
   message: '',
 };
 
+const oldData = JSON.parse(localStorage.getItem('feedback-form-state'));
 const inputData = myFunction(e => {
   logData[e.target.name] = e.target.value;
+  if (logData.email === '' && oldData) {
+    logData.email = oldData.email;
+  } else if (logData.message === '' && oldData) {
+    logData.message = oldData.message;
+  }
   localStorage.setItem('feedback-form-state', JSON.stringify(logData));
 }, 500);
-
-// function inputData(e) {
-//   logData[e.target.name] = e.target.value;
-//   myFunction(
-//     localStorage.setItem('feedback-form-state', JSON.stringify(logData)),
-//     500
-//   );
-// }
-
-form.addEventListener('input', inputData);
 
 function fillInput() {
   const inputFilling = localStorage.getItem('feedback-form-state');
@@ -33,7 +29,7 @@ function fillInput() {
 }
 
 fillInput();
-
+form.addEventListener('input', inputData);
 function cleaner() {
   localStorage.clear();
 }
