@@ -5,14 +5,9 @@ const logData = {
   message: '',
 };
 
-const oldData = JSON.parse(localStorage.getItem('feedback-form-state'));
 const inputData = myFunction(e => {
-  logData[e.target.name] = e.target.value;
-  if (logData.email === '' && oldData) {
-    logData.email = oldData.email;
-  } else if (logData.message === '' && oldData) {
-    logData.message = oldData.message;
-  }
+  logData['email'] = form.email.value;
+  logData['message'] = form.message.value;
   localStorage.setItem('feedback-form-state', JSON.stringify(logData));
 }, 500);
 
